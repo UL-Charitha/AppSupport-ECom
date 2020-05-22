@@ -51,8 +51,30 @@ namespace ConsoleApp1
             mailItem.Display();     // display the email
             mailItem.SaveAs(msgSavePath, Type.Missing);
             //TestMailSave(mailItem, msgSavePath); {For Future Ref if Nedded}
-            
+            //TestSentBox(mailItem);
         }
+
+        public void TestSentBox(MailItem mailItems)
+        {
+            string msgSavePath = @"D:\Projects\CSP\Repo.RnD\ConsoleCSP\ConsoleApp1\msgSentOut.msg";
+            var App = new Microsoft.Office.Interop.Outlook.Application();
+            MailItem mailItem = App.CreateItem(OlItemType.olMailItem);
+
+            mailItem.Subject = "Charitha Live 2020-05-22-Eve. Rep OK.";
+            mailItem.To = "charithawaravita@gmail.com";
+            mailItem.CC = "freshercm@gmail.com";
+            mailItem.Body = "Hi this is the body of the msg. Noted. Happy : " + DateTime.Now.ToShortTimeString();
+
+            //mailItem.DeleteAfterSubmit = false; // force storage to sent items folder (ignore user options)
+            //var sentFolder = App.Session.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderSentMail);    
+            //if (sentFolder != null)
+            //    mailItem.SaveSentMessageFolder = sentFolder; // override the default sent items location
+
+            mailItem.SaveAs(msgSavePath, Type.Missing);
+            mailItem.Send();
+        }
+
+
 
         #region For_Future_Ref
         private void TestMailSave(MailItem mailItem, string msgSavePath)

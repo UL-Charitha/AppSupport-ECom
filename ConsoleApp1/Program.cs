@@ -14,7 +14,8 @@ namespace ConsoleApp1
         {
             Processor proc = new Processor();
 
-            proc.DoWork();
+            //proc.DoWork();
+            proc.TestSentBox(null);
 
             //var response = proc.ReadOutlookMsg();
         }
