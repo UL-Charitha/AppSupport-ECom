@@ -15,13 +15,14 @@ namespace ConsoleApp1
 			{
 				var App = new Microsoft.Office.Interop.Outlook.Application();
 				//var xxxx = App.Session.GetItemFromID("");
-				var mailItem = (MailItem) App.Session.OpenSharedItem(path); 
+				var mailItem = (MailItem) App.Session.OpenSharedItem(path);
 				//as Microsoft.Office.Interop.Outlook.MailItem;
 				//string body = mailx.HTMLBody;
 				//int att = mailx.Attachments.Count;
-				var entryId = mailItem.EntryID;
+				var entryId = mailItem.Subject;
 				mailItem.Display();
 				//var idx = App.Session.GetItemFromID("1");
+				mailItem = null;
 				return entryId;
 			}
 			catch (System.Exception)

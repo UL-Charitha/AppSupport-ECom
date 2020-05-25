@@ -14,16 +14,16 @@ namespace ConsoleApp1
         {
             try
             {
-                string path = @"D:\Projects\CSP\Test\YourWeeklyAttendance.msg";
+                string path = @"D:\Projects\CSP\Test\YourWeeklyAttendance3.msg";
                 string entryIdFix = "000000003612B23E363C234DB1668719ADC28ED80700D0B65853BEFAB740A79FC94F998287A6000000B860FB00008518C8EE6B02CC47A40E72278D44F18C00047A6F067A0000";
                 Processor proc = new Processor();
                 MSGReader msgReader = new MSGReader();
 
-                string entryId = msgReader.GetEntryIdByMsgFile(path);
-                msgReader.ReadMsgByEntryId(entryIdFix);
+                //string entryId = msgReader.GetEntryIdByMsgFile(path);
+                //msgReader.ReadMsgByEntryId(entryIdFix);
 
                 //msgReader.ReadMsgRealTime("");
-                //msgReader.ReadMsg(path);
+                string iddd = msgReader.ReadMsg(path);
 
                 //proc.DoWork();
                 //proc.TestSentBox(null);
