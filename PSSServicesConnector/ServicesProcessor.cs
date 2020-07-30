@@ -248,7 +248,7 @@ namespace PSSServicesConnector
 
             if (fpcash == "FPCASH")
             {
-                throw new PnrAlreadyPaidException(4003, StatusMessage.PNR_ALREADY_PAID);
+                string PaymentMode = "Paid"; // Paid
             }
             // End Reject section
             try
@@ -286,11 +286,11 @@ namespace PSSServicesConnector
                 {
                     if (reply.originDestinationDetails == null)
                     {
-                        throw new PaylaterCommonException(3002, StatusMessage.PNR_EXPIRED);
+                        //throw new PaylaterCommonException(3002, StatusMessage.PNR_EXPIRED);
                     }
                     else
                     {
-                        throw new PaylaterCommonException(3001, StatusMessage.PNR_NOT_PRICED);
+                        //throw new PaylaterCommonException(3001, StatusMessage.PNR_NOT_PRICED);
                     }
 
                 }

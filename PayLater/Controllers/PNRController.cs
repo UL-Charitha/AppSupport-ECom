@@ -11,12 +11,14 @@ using PayLater.Domain.Util;
 using PaylaterException;
 using PaylaterException.Fare;
 using PaylaterException.Common;
+using Domain;
 
 namespace PayLater.Controllers
 {
     public class PNRController : ApiController
     {
         private string test;
+        Helper helper = new Helper();
         /// <summary>
         /// paylater new
         /// </summary>
@@ -131,6 +133,66 @@ namespace PayLater.Controllers
         private string GetPnrInfo(string pnr, string cur)
         {
             return String.Format("The Request for PNR: {0} in {1} was Recieved", pnr, cur);
+        }
+
+        [Route("api/pnr2/{pnr}")]
+        public IHttpActionResult GetPNRx(string pnr) 
+        {
+            // http://localhost:13235/api/PNR/WVH93G/fP9n/LKR
+            string currency = "LKR";
+
+            Pnr pnrRet;
+            TicketInfo ticketInfo;
+            string paymentID = "1234";
+
+            try
+            {
+                DBUtility dbUtil = new DBUtility();
+
+                //Get office id related to bank id
+                //string officeId = "CMBUL08P2";//dbUtil.GetOfficeId(bankCode);
+                string officeId = "LONUL08P1"; // dbUtil.GetOfficeIdNew(bankCode);
+
+                PaylaterLogger.Info("Using office id - " + officeId);
+                PNRService pnrService = new PNRService(officeId);
+                //todo check the bank id format in existing paylater
+
+                //Get pnr object with calculated fare in it.
+                pnrRet = pnrService.GetPnrInfo(pnr, currency);
+
+                ticketInfo = new TicketInfo(Convert.ToInt32(paymentID));
+                ticketInfo.pnrID = pnr;
+                // Validate via DB Info
+                //bool DBvaluesUpdated = SetTicketInfoValues(ticketInfo);
+                // Fill with Amadeus Info
+                bool TicketInfoUpdated = pnrService.GetTicketInfo(ticketInfo);
+                //Finally Generate HTML
+                bool done = GenerateHtmlTicketInformation(ticketInfo);
+
+                return Ok(helper.CreatePnrClientResponse(pnrRet));
+            }
+
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        private bool GenerateHtmlTicketInformation(TicketInfo ticketInfo)
+        {
+            try
+            {
+                //todo : bind to html template !!
+                ticketInfo.ticketInformation = helper.GenerateHtmlTicketInformation(ticketInfo);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
