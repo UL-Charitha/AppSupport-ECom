@@ -52,6 +52,26 @@ namespace PSSServicesConnector
             return pnrObj;
         }
 
+        public Pnr GetPnrInfoModel(string pnr, string destCurrency, CspModel model)
+        {
+            Pnr pnrObj = new Pnr { pnrID = pnr, expDate = System.DateTime.Now };
+
+            bool isPnrUpdated = servicesProc.SetTotalFare(pnrObj);
+
+            pnrObj.DestinationCurrency = destCurrency;
+            if (destCurrency == pnrObj.originCurrency)
+            {
+                pnrObj.totalAmountDestination = pnrObj.totalAmountOrigin;
+            }
+            else
+            {
+                bool isFareConversionUpdated = servicesProc.SetConvertedAmount(pnrObj);
+            }
+            pnrObj.msg = StatusMessage.SUCCESS;
+            pnrObj.responseCode = 0;
+            return pnrObj;
+        }
+
 
         public bool ProcessPayment(Payment payment)
         {

@@ -140,10 +140,10 @@ namespace PayLater.Controllers
         {
             // http://localhost:13235/api/PNR/WVH93G/fP9n/LKR
             string currency = "LKR";
-
             Pnr pnrRet;
             TicketInfo ticketInfo;
             string paymentID = "1234";
+            CspModel model = new CspModel();
 
             try
             {
@@ -158,7 +158,7 @@ namespace PayLater.Controllers
                 //todo check the bank id format in existing paylater
 
                 //Get pnr object with calculated fare in it.
-                pnrRet = pnrService.GetPnrInfo(pnr, currency);
+                pnrRet = pnrService.GetPnrInfoModel(pnr, currency, model);
 
                 ticketInfo = new TicketInfo(Convert.ToInt32(paymentID));
                 ticketInfo.pnrID = pnr;

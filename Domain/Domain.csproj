@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BankReconciliationClientWrapper.cs" />
     <Compile Include="BankReconciliationPayment.cs" />
+    <Compile Include="CspModel.cs" />
     <Compile Include="ItineraryInfo.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="PaymentClientWrapper.cs" />

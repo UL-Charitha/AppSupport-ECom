@@ -42,6 +42,10 @@ namespace PSSServicesConnector
                 baseFare = ProcessResponsePnrRetrieve(reply);
                 originCurrency = GetOriginCurrency(reply);
 
+                var OfficeIdX = reply.sbrCreationPosDetails.sbrUserIdentificationOwn.originIdentification.inHouseIdentification1;
+                var ofcX2 = reply.sbrUpdatorPosDetails.sbrUserIdentificationOwn.originIdentification.inHouseIdentification1;
+                var x2 = reply.technicalData.purgeDateData.dateTime;
+
                 pnr.expDate = SetPnrExpiryDate(reply);
                 if (pnr.expDate < DateTime.UtcNow)
                 {
