@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PayLaterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PYL_M_RECONCILIATION_PAYMENT">
+          <Key>
+            <PropertyRef Name="ReconciliationPaymentId" />
+          </Key>
+          <Property Name="BankCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="FromDate" Type="date" Nullable="false" />
+          <Property Name="ToDate" Type="date" Nullable="false" />
+          <Property Name="ReconciliationPaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PYL_M_UTC_TIME">
+          <Key>
+            <PropertyRef Name="DepartureStation" />
+          </Key>
+          <Property Name="DepartureStation" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="UtcDifferenceMinutes" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PayLater.dbo.PYL_T_BANK_OFFICEID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PYL_T_BANK_OFFICEID">
+          <Key>
+            <PropertyRef Name="BankCode" />
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="BankCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="OfficeId" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItineraryInfoShown" Type="bit" />
+        </EntityType>
+        <EntityType Name="PYL_T_PAYMENT">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pnr" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="TotalAmountOriginal" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CurrencyOriginal" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="TotalAmountDestination" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="CurrencyDestination" Type="nvarchar" MaxLength="4" />
+          <Property Name="BankRef" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="BankCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="StatusCode" Type="int" />
+          <Property Name="ResponseCode" Type="int" Nullable="false" />
+          <Property Name="ResponseMessage" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PYL_T_PNR_FARE">
+          <Key>
+            <PropertyRef Name="Pnr" />
+            <PropertyRef Name="TransactionUTCTime" />
+          </Key>
+          <Property Name="Pnr" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="TotalAmountOriginal" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CurrencyOriginal" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="TotalAmountDestination" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="CurrencyDestination" Type="nvarchar" MaxLength="4" />
+          <Property Name="BankCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="TransactionUTCTime" Type="datetime" Nullable="false" />
+          <Property Name="ResponseCode" Type="int" Nullable="false" />
+          <Property Name="ResponseMessage" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PYL_T_RECONCILIATION_PAYMENT_DETAIL">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="ReconciliationPaymentId" Type="int" Nullable="false" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="BankRef" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="Pnr" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TransactionDate" Type="date" Nullable="false" />
+          <Property Name="ResponseCode" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PYL_T_TICKET">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+            <PropertyRef Name="TicketNo" />
+          </Key>
+          <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="TicketNo" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="PassengerType" Type="varchar" MaxLength="5" />
+          <Property Name="TicketPrice" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Currency" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityContainer Name="PayLaterModelStoreContainer">
+          <EntitySet Name="PYL_M_RECONCILIATION_PAYMENT" EntityType="Self.PYL_M_RECONCILIATION_PAYMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PYL_M_UTC_TIME" EntityType="Self.PYL_M_UTC_TIME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PYL_T_PAYMENT" EntityType="Self.PYL_T_PAYMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PYL_T_PNR_FARE" EntityType="Self.PYL_T_PNR_FARE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PYL_T_RECONCILIATION_PAYMENT_DETAIL" EntityType="Self.PYL_T_RECONCILIATION_PAYMENT_DETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PYL_T_TICKET" EntityType="Self.PYL_T_TICKET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PYL_T_BANK_OFFICEID" EntityType="Self.PYL_T_BANK_OFFICEID" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PYL_T_BANK_OFFICEID].[BankCode] AS [BankCode], 
+    [PYL_T_BANK_OFFICEID].[OfficeId] AS [OfficeId], 
+    [PYL_T_BANK_OFFICEID].[BankName] AS [BankName], 
+    [PYL_T_BANK_OFFICEID].[ItineraryInfoShown] AS [ItineraryInfoShown]
+    FROM [dbo].[PYL_T_BANK_OFFICEID] AS [PYL_T_BANK_OFFICEID]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PayLaterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PayLaterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PYL_T_PNR_FARE" EntityType="PayLaterModel.PYL_T_PNR_FARE" />
+          <EntitySet Name="PYL_T_TICKET" EntityType="PayLaterModel.PYL_T_TICKET" />
+          <EntitySet Name="PYL_T_PAYMENT" EntityType="PayLaterModel.PYL_T_PAYMENT" />
+          <EntitySet Name="PYL_M_RECONCILIATION_PAYMENT" EntityType="PayLaterModel.PYL_M_RECONCILIATION_PAYMENT" />
+          <EntitySet Name="PYL_T_RECONCILIATION_PAYMENT_DETAIL" EntityType="PayLaterModel.PYL_T_RECONCILIATION_PAYMENT_DETAIL" />
+          <EntitySet Name="PYL_M_UTC_TIME" EntityType="PayLaterModel.PYL_M_UTC_TIME" />
+          <EntitySet Name="PYL_T_BANK_OFFICEID" EntityType="PayLaterModel.PYL_T_BANK_OFFICEID" />
+        </EntityContainer>
+        <EntityType Name="PYL_T_PNR_FARE">
+          <Key>
+            <PropertyRef Name="Pnr" />
+            <PropertyRef Name="TransactionUTCTime" />
+          </Key>
+          <Property Name="Pnr" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmountOriginal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CurrencyOriginal" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmountDestination" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="CurrencyDestination" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="BankCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionUTCTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
+          <Property Name="ResponseMessage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PYL_T_TICKET">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+            <PropertyRef Name="TicketNo" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="TicketNo" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="PassengerType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="TicketPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Currency" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PYL_T_PAYMENT">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pnr" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmountOriginal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CurrencyOriginal" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmountDestination" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="CurrencyDestination" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="BankRef" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BankCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="StatusCode" Type="Int32" />
+          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
+          <Property Name="ResponseMessage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PYL_M_RECONCILIATION_PAYMENT">
+          <Key>
+            <PropertyRef Name="ReconciliationPaymentId" />
+          </Key>
+          <Property Name="BankCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="ReconciliationPaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="PYL_T_RECONCILIATION_PAYMENT_DETAIL">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="ReconciliationPaymentId" Type="Int32" Nullable="false" />
+          <Property Name="BranchCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="BankRef" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="Pnr" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PYL_M_UTC_TIME">
+          <Key>
+            <PropertyRef Name="DepartureStation" />
+          </Key>
+          <Property Name="DepartureStation" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="UtcDifferenceMinutes" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PYL_T_BANK_OFFICEID">
+          <Key>
+            <PropertyRef Name="BankCode" />
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="BankCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItineraryInfoShown" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PayLaterModelStoreContainer" CdmEntityContainer="PayLaterEntities">
+          <EntitySetMapping Name="PYL_T_PNR_FARE">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_T_PNR_FARE">
+              <MappingFragment StoreEntitySet="PYL_T_PNR_FARE">
+                <ScalarProperty Name="ResponseMessage" ColumnName="ResponseMessage" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="TransactionUTCTime" ColumnName="TransactionUTCTime" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="CurrencyDestination" ColumnName="CurrencyDestination" />
+                <ScalarProperty Name="TotalAmountDestination" ColumnName="TotalAmountDestination" />
+                <ScalarProperty Name="CurrencyOriginal" ColumnName="CurrencyOriginal" />
+                <ScalarProperty Name="TotalAmountOriginal" ColumnName="TotalAmountOriginal" />
+                <ScalarProperty Name="Pnr" ColumnName="Pnr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PYL_T_TICKET">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_T_TICKET">
+              <MappingFragment StoreEntitySet="PYL_T_TICKET">
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="TicketPrice" ColumnName="TicketPrice" />
+                <ScalarProperty Name="PassengerType" ColumnName="PassengerType" />
+                <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PYL_T_PAYMENT">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_T_PAYMENT">
+              <MappingFragment StoreEntitySet="PYL_T_PAYMENT">
+                <ScalarProperty Name="ResponseMessage" ColumnName="ResponseMessage" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="BankRef" ColumnName="BankRef" />
+                <ScalarProperty Name="CurrencyDestination" ColumnName="CurrencyDestination" />
+                <ScalarProperty Name="TotalAmountDestination" ColumnName="TotalAmountDestination" />
+                <ScalarProperty Name="CurrencyOriginal" ColumnName="CurrencyOriginal" />
+                <ScalarProperty Name="TotalAmountOriginal" ColumnName="TotalAmountOriginal" />
+                <ScalarProperty Name="Pnr" ColumnName="Pnr" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PYL_M_RECONCILIATION_PAYMENT">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_M_RECONCILIATION_PAYMENT">
+              <MappingFragment StoreEntitySet="PYL_M_RECONCILIATION_PAYMENT">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReconciliationPaymentId" ColumnName="ReconciliationPaymentId" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PYL_T_RECONCILIATION_PAYMENT_DETAIL">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_T_RECONCILIATION_PAYMENT_DETAIL">
+              <MappingFragment StoreEntitySet="PYL_T_RECONCILIATION_PAYMENT_DETAIL">
+                <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Pnr" ColumnName="Pnr" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="BankRef" ColumnName="BankRef" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ReconciliationPaymentId" ColumnName="ReconciliationPaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PYL_M_UTC_TIME">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_M_UTC_TIME">
+              <MappingFragment StoreEntitySet="PYL_M_UTC_TIME">
+                <ScalarProperty Name="UtcDifferenceMinutes" ColumnName="UtcDifferenceMinutes" />
+                <ScalarProperty Name="DepartureStation" ColumnName="DepartureStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PYL_T_BANK_OFFICEID">
+            <EntityTypeMapping TypeName="PayLaterModel.PYL_T_BANK_OFFICEID">
+              <MappingFragment StoreEntitySet="PYL_T_BANK_OFFICEID">
+                <ScalarProperty Name="ItineraryInfoShown" ColumnName="ItineraryInfoShown" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

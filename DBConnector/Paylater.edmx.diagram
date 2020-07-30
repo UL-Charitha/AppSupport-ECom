@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3cbe7baf81fc4364926a6e54ef87c0ff" Name="Diagram1">
+        <EntityTypeShape EntityType="PayLaterModel.PYL_T_PNR_FARE" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PayLaterModel.PYL_T_TICKET" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="PayLaterModel.PYL_T_PAYMENT" Width="2.625" PointX="0.875" PointY="2.625" />
+        <EntityTypeShape EntityType="PayLaterModel.PYL_M_RECONCILIATION_PAYMENT" Width="1.5" PointX="7.375" PointY="1.625" />
+        <EntityTypeShape EntityType="PayLaterModel.PYL_T_RECONCILIATION_PAYMENT_DETAIL" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="PayLaterModel.PYL_M_UTC_TIME" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="PayLaterModel.PYL_T_BANK_OFFICEID" Width="2.75" PointX="7.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

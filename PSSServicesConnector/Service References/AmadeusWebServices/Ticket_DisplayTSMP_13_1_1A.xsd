@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://xml.amadeus.com/TTSMRQ_13_1_1A" elementFormDefault="qualified" targetNamespace="http://xml.amadeus.com/TTSMRQ_13_1_1A" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Ticket_DisplayTSMP">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Display a TSM-P query
+Display a TSM-P
+T: Ticketing TSM: Transitional Stored Miscellaneous document R: Read Q: Query  Version 13: Alias of version 12.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="tattooOfTSM" type="ItemReferencesAndVersionsType">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Tattoo of the TSM-P to display.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ItemReferencesAndVersionsType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Exchange and link unique identifiers</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="uniqueReference" type="AlphaNumericString_Length1To35">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The value of the reference</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AlphaNumericString_Length1To35">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..35</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="35" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

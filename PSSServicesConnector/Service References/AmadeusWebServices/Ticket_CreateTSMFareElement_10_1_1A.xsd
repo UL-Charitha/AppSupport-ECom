@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://xml.amadeus.com/TFRECQ_10_1_1A" elementFormDefault="qualified" targetNamespace="http://xml.amadeus.com/TFRECQ_10_1_1A" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Ticket_CreateTSMFareElement">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Set a fare element to a TSM</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="fareElementTattoo" type="ElementManagementSegmentType">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">The tattoo of the fare element, which is composed of: - the tattoo of the TSM - and the type of the fare element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="fareElementInfo" type="LongTextStringTypeI">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Unstructured fare element information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ElementManagementSegmentType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To specify the PNR segments/elements references and action to apply</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="reference" type="ReferencingDetailsType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Contains the type of the Fare element and the tatoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LongTextStringTypeI">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To provide unlimited length free for information.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="text" type="AlphaNumericString_Length1To9999">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Long text</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReferencingDetailsType">
+    <xs:sequence>
+      <xs:element name="qualifier" type="AlphaNumericString_Length1To10">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Type of the fare element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="number" type="NumericInteger_Length1To35">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Tattoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AlphaNumericString_Length1To9999">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..9999</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="9999" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlphaNumericString_Length1To10">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..10</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NumericInteger_Length1To35">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: n..35</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="-?[0-9]{1,35}" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

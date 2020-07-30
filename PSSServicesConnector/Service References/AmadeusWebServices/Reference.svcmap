@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="66f85be2-8d67-4e99-93ad-fa1d49bd7864" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="D:\UserData\projects\paylater\newsource\trunk\PayLater\wsdl\1ASIWPYLUL_PDT_20170222_051450.wsdl" Protocol="file" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FOP_CreateFormOfPaymentReply_15_4_1A.xsd" MetadataType="Schema" ID="bda0f66f-5907-4e7c-8c36-88c155f71b87" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/FOP_CreateFormOfPaymentReply_15_4_1A.xsd" />
+    <MetadataFile FileName="Security_AuthenticateReply_06_1_1A.xsd" MetadataType="Schema" ID="d74ed6ac-a2da-4f78-aa1a-af847c2964bd" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Security_AuthenticateReply_06_1_1A.xsd" />
+    <MetadataFile FileName="AMA2012B.xsd" MetadataType="Schema" ID="e2c575ec-b601-4ee0-b590-985ae59ce78d" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/AMA/2012B/AMA_AppMdw_CommonTypes_Proxy.xsd" />
+    <MetadataFile FileName="PNR_Cancel_14_2_1A.xsd" MetadataType="Schema" ID="f283dfcf-dbfa-43a2-8518-03f1a4aa357b" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/PNR_Cancel_14_2_1A.xsd" />
+    <MetadataFile FileName="1ASIWPYLUL_PDT_20170222_051450.wsdl" MetadataType="Wsdl" ID="d4a869f2-16d3-4c8b-b4bd-6e203400b19d" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/1ASIWPYLUL_PDT_20170222_051450.wsdl" />
+    <MetadataFile FileName="Security_SignOutReply_04_1_1A.xsd" MetadataType="Schema" ID="1d0640a1-5721-4c8b-a3df-c6e4f8603abf" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Security_SignOutReply_04_1_1A.xsd" />
+    <MetadataFile FileName="OTA_Proxy.xsd" MetadataType="Schema" ID="50fcb164-f025-4803-873a-25eb34a1c767" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/OTA/2010B/OTA_Proxy.xsd" />
+    <MetadataFile FileName="DocIssuance_IssueMiscellaneousDocumentsReply_15_1_1A.xsd" MetadataType="Schema" ID="179ea433-d837-4250-988a-a9607e7f3b47" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/DocIssuance_IssueMiscellaneousDocumentsReply_15_1_1A.xsd" />
+    <MetadataFile FileName="AMA2012B1.xsd" MetadataType="Schema" ID="9acb504d-13c2-4eda-bef5-92f7abcdd68e" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/AMA/2012B/AMA_WS_Session.xsd" />
+    <MetadataFile FileName="AMA2012B2.xsd" MetadataType="Schema" ID="aa3427b5-a594-4e90-bb88-d0a311a5083b" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/AMA/2012B/AMA_SecurityHostedUser.xsd" />
+    <MetadataFile FileName="Ticket_DisplayTSMPReply_13_1_1A.xsd" MetadataType="Schema" ID="e1d1887f-296c-4eb1-9370-2e8b63ddc8ec" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_DisplayTSMPReply_13_1_1A.xsd" />
+    <MetadataFile FileName="DocIssuance_IssueMiscellaneousDocuments_15_1_1A.xsd" MetadataType="Schema" ID="13538d0a-ac90-4b40-a52d-3dfcd390b9cc" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/DocIssuance_IssueMiscellaneousDocuments_15_1_1A.xsd" />
+    <MetadataFile FileName="Ticket_CreateTSMFareElement_10_1_1A.xsd" MetadataType="Schema" ID="de1e54b9-ac16-4418-a5e8-ac0b9b348b00" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_CreateTSMFareElement_10_1_1A.xsd" />
+    <MetadataFile FileName="PNR_Retrieve_14_2_1A.xsd" MetadataType="Schema" ID="5fd45add-bae2-4f2a-80fc-07bd2aab1342" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/PNR_Retrieve_14_2_1A.xsd" />
+    <MetadataFile FileName="AMA2011Y.xsd" MetadataType="Schema" ID="ff15b0db-e888-4038-952a-7e63abd00746" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/AMA/2011Y/AMA_CommonTypes_Proxy.xsd" />
+    <MetadataFile FileName="Queue_PlacePNR_03_1_1A.xsd" MetadataType="Schema" ID="c535343d-45e8-404d-8001-1c2d9a32c87d" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Queue_PlacePNR_03_1_1A.xsd" />
+    <MetadataFile FileName="DocIssuance_IssueTicketReply_15_1_1A.xsd" MetadataType="Schema" ID="b706f921-097f-4a02-b78a-a2de77ddb766" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/DocIssuance_IssueTicketReply_15_1_1A.xsd" />
+    <MetadataFile FileName="Ticket_RetrieveListOfTSMReply_09_1_1A.xsd" MetadataType="Schema" ID="4990e7fd-e092-40ba-8d60-001f3adaff7b" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_RetrieveListOfTSMReply_09_1_1A.xsd" />
+    <MetadataFile FileName="Fare_ConvertCurrencyReply_08_1_1A.xsd" MetadataType="Schema" ID="f9f59bc5-1584-4809-9e90-6959093e4d5a" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Fare_ConvertCurrencyReply_08_1_1A.xsd" />
+    <MetadataFile FileName="Security_Authenticate_06_1_1A.xsd" MetadataType="Schema" ID="5982fd9b-09db-4f52-837a-65e9850d4ec0" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Security_Authenticate_06_1_1A.xsd" />
+    <MetadataFile FileName="FOP_CreateFormOfPayment_15_4_1A.xsd" MetadataType="Schema" ID="b753bb6f-fc6b-4ed2-baaf-e0f4ab7619d1" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/FOP_CreateFormOfPayment_15_4_1A.xsd" />
+    <MetadataFile FileName="DocIssuance_IssueTicket_15_1_1A.xsd" MetadataType="Schema" ID="a2ee2992-0413-4c81-aabe-fe4c0aacab64" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/DocIssuance_IssueTicket_15_1_1A.xsd" />
+    <MetadataFile FileName="DocIssuance_IssueCombinedReply_15_1_1A.xsd" MetadataType="Schema" ID="8d1489be-3215-48b5-a4f8-0d22dec10bad" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/DocIssuance_IssueCombinedReply_15_1_1A.xsd" />
+    <MetadataFile FileName="PNR_Reply_14_2_1A.xsd" MetadataType="Schema" ID="e40f1601-e842-4823-a121-d17e6c2e4a2c" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/PNR_Reply_14_2_1A.xsd" />
+    <MetadataFile FileName="Ticket_DisplayTST_15_1_1A.xsd" MetadataType="Schema" ID="38040f2e-d13e-429d-91d7-30ec6529ab36" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_DisplayTST_15_1_1A.xsd" />
+    <MetadataFile FileName="PNR_AddMultiElements_14_2_1A.xsd" MetadataType="Schema" ID="17edee02-ad42-496b-b3c9-7b0b30279b36" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/PNR_AddMultiElements_14_2_1A.xsd" />
+    <MetadataFile FileName="Ticket_CreateTSMFareElementReply_10_1_1A.xsd" MetadataType="Schema" ID="fc98035f-c23e-4021-a049-26b6782b4901" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_CreateTSMFareElementReply_10_1_1A.xsd" />
+    <MetadataFile FileName="AMA_WSLink.xsd" MetadataType="Schema" ID="8f016b8c-1db8-4866-a969-410095439785" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/AMA_WSLink.xsd" />
+    <MetadataFile FileName="PNR_List_00_1_1A.xsd" MetadataType="Schema" ID="0efd9e84-e247-4ab6-a209-1275f510b8b6" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/PNR_List_00_1_1A.xsd" />
+    <MetadataFile FileName="DocIssuance_IssueCombined_15_1_1A.xsd" MetadataType="Schema" ID="2169074c-b374-43c0-8040-420688b6cd79" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/DocIssuance_IssueCombined_15_1_1A.xsd" />
+    <MetadataFile FileName="Fare_ConvertCurrency_08_1_1A.xsd" MetadataType="Schema" ID="ff0c56a6-c3ec-4b47-8da4-28706e73f5e2" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Fare_ConvertCurrency_08_1_1A.xsd" />
+    <MetadataFile FileName="Ticket_DisplayTSTReply_15_1_1A.xsd" MetadataType="Schema" ID="1a1a57a2-4ab6-42be-838e-01e0359ace9c" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_DisplayTSTReply_15_1_1A.xsd" />
+    <MetadataFile FileName="Ticket_DisplayTSMP_13_1_1A.xsd" MetadataType="Schema" ID="d7392f77-cfaf-4119-9eb5-2fcb3073324d" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_DisplayTSMP_13_1_1A.xsd" />
+    <MetadataFile FileName="IATA_Proxy.xsd" MetadataType="Schema" ID="a8debf8b-c02c-42ce-89d7-93b5a91b6fb2" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/IATA/2010.1/IATA_Proxy.xsd" />
+    <MetadataFile FileName="Security_SignOut_04_1_1A.xsd" MetadataType="Schema" ID="6c73341d-ac61-4bd9-82ea-89119e59b8f8" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Security_SignOut_04_1_1A.xsd" />
+    <MetadataFile FileName="Queue_PlacePNRReply_03_1_1A.xsd" MetadataType="Schema" ID="a020201f-2f34-44cf-894b-148b824317d6" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Queue_PlacePNRReply_03_1_1A.xsd" />
+    <MetadataFile FileName="Ticket_RetrieveListOfTSM_09_1_1A.xsd" MetadataType="Schema" ID="7a755b65-97d3-44e2-aa24-b464ab87e42a" SourceId="1" SourceUrl="file:///D:/UserData/projects/paylater/newsource/trunk/PayLater/wsdl/Ticket_RetrieveListOfTSM_09_1_1A.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

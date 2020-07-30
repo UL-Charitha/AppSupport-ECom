@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.amadeus.com/TFRECQ_10_1_1A" xmlns="http://xml.amadeus.com/TFRECQ_10_1_1A" elementFormDefault="qualified">
+  <xs:element name="Ticket_CreateTSMFareElement">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Set a fare element to a TSM</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="fareElementTattoo" type="ElementManagementSegmentType">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">The tattoo of the fare element, which is composed of: - the tattoo of the TSM - and the type of the fare element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="fareElementInfo" type="LongTextStringTypeI">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Unstructured fare element information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ElementManagementSegmentType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To specify the PNR segments/elements references and action to apply</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="reference" type="ReferencingDetailsType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Contains the type of the Fare element and the tatoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LongTextStringTypeI">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To provide unlimited length free for information.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="text" type="AlphaNumericString_Length1To9999">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Long text</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReferencingDetailsType">
+    <xs:sequence>
+      <xs:element name="qualifier" type="AlphaNumericString_Length1To10">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Type of the fare element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="number" type="NumericInteger_Length1To35">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Tattoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AlphaNumericString_Length1To9999">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..9999</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="9999" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlphaNumericString_Length1To10">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..10</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NumericInteger_Length1To35">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: n..35</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="-?[0-9]{1,35}" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+<!-- SchemaRules="2010/01"-->
+<!--Created with SchemaBuilder 4.2 by Amadeus S.A.S.-->
+<!--"Amadeus Proprietary and Confidential Information: unauthorized use and disclosure strictly forbidden. 2010 - Amadeus s.a.s - All Rights Reserved."-->
+<!--Build Key:
+1F8B08000000000000009594CB6EDB301045F7FC0AA29B2E0ADB52527461800BC58FA0689DA4B68A6E0C180C39B68950A4CAA182A841FEBD43496EDC4D1F80200C87D4E5F0DCA1AE17378B75512EE6BBDB1B7191E5F928BBA0877F03ED00B56C79FE7E9A7F985E5CF2EB55F92ECBA659C68A5511DB1A70692C385981A0C4EE4AA251654A8F9F50B37B89704373584B05E218633D9D4C9E2A3B9695D4D0E058F96AC2D411D4C386DE95143134C094D780105138EFD2A8AAC0D16898AB6AE9DAA42A5C632D25EA3698C3318A3745AFCAEF82AF83812843CBA5D37CE6DDDE68D230D2F28F6EEF4325A3F16ECA1B279B78F4C1FC00CD1B846EB936A8ACC72600C7188C8AB6E5F4CDBDD1A431E60428E3237EDA0CC7728C696C2D5FA73A90AFA9FAF0087AFC8669D8CBC6C6EB50272A5AECA54560DA37F71636F0BD01A7E04E4675EC4F07EEEA9F90817B5DF39C6C78D93D3F42403A1445012C900C45F2401BB42F6C4F26AD1B4BC87CF2AB1B77A6751FA7E82F02D62B6907E2D61FB409623EDD2EB4D94B154BEF2D6E17E56E6E304A1767E41139479E6D57323C4034EED0AFC1CE65DC7EF607927187AE06A36F9D6D5905E10003A02E5E1AB01A373EC45FE0E8CC4825159868FE9E9B93DFC60E3DE3FE8B4EED8D8B3710CF8C08DEC73338AC2F3C21C47443B249960F395CFA5058438A438726EF8D029C53E7D08ED4843D36AC648849EDAB33CAC476283F06E9D076FD485404C1C5C9A05C16ABC9B3066BA878490DF332A659968AD2E7D785BA6376BA23BD26653A40DD05354EB127B4F1B689751397DE6A082225181B8D563DBCB7C8CDEBBD188D588F46E4053BDB5F1477C5AE348A1CDDE5D925B571258D13E5A7F264029701A4C8E9F7302444B95C2F665F584D0D6FF04846F6787B0F444ED1A349C650D891901D3431EC3223B908E566B524E1858574487672E58F8B06BFA916F6139206E529DF040000
+-->
+

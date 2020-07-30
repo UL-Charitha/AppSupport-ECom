@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{293DA5E7-D02C-4822-9AB0-4635A9813573}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PSSServicesConnector</RootNamespace>
+    <AssemblyName>PSSServicesConnector</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Microsoft.Web.Services3.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NUnit.System.Linq">
+      <HintPath>..\lib\NUnit.System.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Amadeus\Dispatcher\LoggingBehavior.cs" />
+    <Compile Include="Amadeus\Dispatcher\MessageLoggingInspector.cs" />
+    <Compile Include="Amadeus\Dispatcher\SecurityBehavior.cs" />
+    <Compile Include="Amadeus\Dispatcher\SecurityTokenInspector.cs" />
+    <Compile Include="Amadeus\Handlers\AddressingHandler.cs" />
+    <Compile Include="Amadeus\Handlers\HeaderHandler.cs" />
+    <Compile Include="Amadeus\Handlers\SecurityHandler.cs" />
+    <Compile Include="Amadeus\Handlers\ServiceHandler.cs" />
+    <Compile Include="Amadeus\Handlers\SessionHandler.cs" />
+    <Compile Include="Amadeus\Handlers\TransactionFlowLinkHandler.cs" />
+    <Compile Include="Amadeus\MessageFactory.cs" />
+    <Compile Include="Amadeus\Program.cs" />
+    <Compile Include="Amadeus\ServiceHandlerTest.cs" />
+    <Compile Include="PNRService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AmadeusWebServices\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServicesProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\AmadeusWebServices\1ASIWPYLUL_PDT_20170222_051450.wsdl" />
+    <None Include="Service References\AmadeusWebServices\AMA2011Y.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\AMA2012B.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\AMA2012B1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\AMA2012B2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\AMA_WSLink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\DocIssuance_IssueCombinedReply_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\DocIssuance_IssueCombined_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\DocIssuance_IssueMiscellaneousDocumentsReply_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\DocIssuance_IssueMiscellaneousDocuments_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\DocIssuance_IssueTicketReply_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\DocIssuance_IssueTicket_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Fare_ConvertCurrencyReply_08_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Fare_ConvertCurrency_08_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\FOP_CreateFormOfPaymentReply_15_4_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\FOP_CreateFormOfPayment_15_4_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\IATA_Proxy.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\OTA_Proxy.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PNR_AddMultiElements_14_2_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PNR_Cancel_14_2_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PNR_List_00_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PNR_Reply_14_2_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PNR_Retrieve_14_2_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.DocIssuance_IssueCombinedReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.DocIssuance_IssueCombinedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.DocIssuance_IssueMiscellaneousDocumentsReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.DocIssuance_IssueMiscellaneousDocumentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.DocIssuance_IssueTicketReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.DocIssuance_IssueTicketResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Fare_ConvertCurrencyReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Fare_ConvertCurrencyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.FOP_CreateFormOfPaymentReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.FOP_CreateFormOfPaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.PNR_AddMultiElementsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.PNR_List.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.PNR_Reply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.PNR_Retrieve2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Queue_PlacePNRReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Queue_PlacePNRResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Security_AuthenticateReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Security_AuthenticateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Security_SignOutReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Security_SignOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Session.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_CreateTSMFareElementReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_CreateTSMFareElementResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_DisplayTSMPReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_DisplayTSMPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_DisplayTSTReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_DisplayTSTResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_RetrieveListOfTSMReply.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.Ticket_RetrieveListOfTSMResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\PSSServicesConnector.AmadeusWebServices.TransactionFlowLinkType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Queue_PlacePNRReply_03_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Queue_PlacePNR_03_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Security_AuthenticateReply_06_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Security_Authenticate_06_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Security_SignOutReply_04_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Security_SignOut_04_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_CreateTSMFareElementReply_10_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_CreateTSMFareElement_10_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_DisplayTSMPReply_13_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_DisplayTSMP_13_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_DisplayTSTReply_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_DisplayTST_15_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_RetrieveListOfTSMReply_09_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmadeusWebServices\Ticket_RetrieveListOfTSM_09_1_1A.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AmadeusWebServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AmadeusWebServices\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AmadeusWebServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AmadeusWebServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBConnector\DBConnector.csproj">
+      <Project>{c4573916-2355-4e81-989f-b687bc86c5db}</Project>
+      <Name>DBConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{e2452e34-1303-46c0-b3dc-e2d480f7517f}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaylaterException\PaylaterException.csproj">
+      <Project>{0186db04-86a7-473e-b1d6-388655bfb8de}</Project>
+      <Name>PaylaterException</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

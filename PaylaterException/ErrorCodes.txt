@@ -1,0 +1,40 @@
+﻿Error Code:		Message
+-----------------------
+
+COMMON
+-----------------------
+0			Success
+1000			Bank Code Not Found
+2000,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21	Internal Error
+2010			Missing Expiry Date
+2020			Queue process Failed
+2021			Fare Conversion Failed
+
+
+FARE_RETRIEVAL
+-----------------------
+3000			PNR Not Found
+3001			PNR is not Prized
+3002			PNR has expired
+3003			Board point not supported
+
+PAYMENT
+-----------------------
+4000			Incorrect Amount For PNR
+4001			Ticketing Failed After Payment Success
+
+4003			PNR_ALREADY_PAID
+
+4004			Incorrect PNR Input
+4005			Incorrect PNR Destination Currency Input
+4006			Incorrect PNR Destination Amount Input
+4007			Incorrect Bank Code Input
+4008			Too Long Bank Reference Code Input
+4009			Too Long Customer Name Input
+
+5001			Payment not Found
+
+RECONCILIATION
+---------------------------
+6000			Duplicate entry found
+6001			<> field required

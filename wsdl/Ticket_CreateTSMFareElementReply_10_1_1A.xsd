@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.amadeus.com/TFRECR_10_1_1A" xmlns="http://xml.amadeus.com/TFRECR_10_1_1A" elementFormDefault="qualified">
+  <xs:element name="Ticket_CreateTSMFareElementReply">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Set a fare element to a TSM</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="errorWarningGroup" minOccurs="0" type="ErrorGroupType">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Error or warning returned by the application.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="fareElementTattoo" type="ElementManagementSegmentType">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">-Type of the fare element. -Tattoo of the fare element.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ApplicationErrorDetailType">
+    <xs:sequence>
+      <xs:element name="errorCode" type="AlphaNumericString_Length1To5">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Code identifying the data validation error condition.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="errorCategory" minOccurs="0" type="AlphaNumericString_Length1To3">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Identification of a code list.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="errorCodeOwner" minOccurs="0" type="AlphaNumericString_Length1To3">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Code identifying the agency responsible for a code list.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ApplicationErrorInformationType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To identify the type of application error within a message.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="errorDetails" type="ApplicationErrorDetailType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Application error details.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElementManagementSegmentType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">To specify the PNR segments/elements references and action to apply</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="reference" type="ReferencingDetailsType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Contains the type of the Fare element and the tatoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorGroupType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Conveys a potential error.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="errorOrWarningCodeDetails" type="ApplicationErrorInformationType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The details of error/warning code.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="errorWarningDescription" minOccurs="0" type="FreeTextInformationType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The desciption of warning or error.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FreeTextDetailsType">
+    <xs:sequence>
+      <xs:element name="textSubjectQualifier" type="AlphaNumericString_Length1To3">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Qualifier of the free text</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="language" minOccurs="0" type="AlphaNumericString_Length1To3">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Whenever possible the language in which the free text is written.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="source" type="AlphaNumericString_Length1To3">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Source:  - M (for Manual) if the free text comes from GUI or live agent entry,  - S (default value) if the free text comes from another system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="encoding" type="AlphaNumericString_Length1To3">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Encoding: - 1 for ASCII 7 bit (no national characters)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FreeTextInformationType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">This segment is used to convey the free text</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="freeTextDetails" type="FreeTextDetailsType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Details about the free text.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="freeText" maxOccurs="99" type="AlphaNumericString_Length1To199">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Free text and message sequence numbers of the remarks.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReferencingDetailsType">
+    <xs:sequence>
+      <xs:element name="qualifier" type="AlphaNumericString_Length1To10">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Type of the fare element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="number" type="NumericInteger_Length1To35">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Tattoo of the associated TSM.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AlphaNumericString_Length1To199">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..199</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="199" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlphaNumericString_Length1To5">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..5</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="5" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlphaNumericString_Length1To3">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..3</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlphaNumericString_Length1To10">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: an..10</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NumericInteger_Length1To35">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format limitations: n..35</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:pattern value="-?[0-9]{1,35}" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+<!-- SchemaRules="2010/01"-->
+<!--Created with SchemaBuilder 4.2 by Amadeus S.A.S.-->
+<!--"Amadeus Proprietary and Confidential Information: unauthorized use and disclosure strictly forbidden. 2010 - Amadeus s.a.s - All Rights Reserved."-->
+<!--Build Key:
+1F8B08000000000000009554CB6EDB3010BCF32B885C7A286C4B49D183011E143F82A27512D82A7A316030E4DA2642912A970AA206F9F72E25B9712F7D0082B05C52B3CB9959DD2C6E17EBA25CCC7777B7E232CBF35176490FFF06DA016AD9F2FCC334FF38BDBCE237ABF27D964DB38C15AB22B635E0D25870B2024189DDB544A3CA941E3FA3660F12E196F6B0960AC431C67A3A993C57762C2BA9A1C1B1F2D584A923A8C70DBD2B2962688029AF0121A270DEA5555581A3D5B057D5D2B50955B8C65A4AD46D3087631417458FCAEF83AF83812843CBA5D37CE6DDDE68C230D2F24F6EEF4325A3F16ECA1B279B78F4C1FC00CD1B84EEB836A8ACC72600C7188C8AB6E5F4CD83D18431E64450C647FC540CC7728C696D2D5FA73E90AFA9FBF0047A7CC134EC6563E34DA8132B5AECA54560DA370F1636F0BD01A7E05E4675EC6F07EEFA9F2803F776E625C9F0BA7B79828074298A025820188AE4810AB4AF6C4F22AD1B4B94F9A457B7EE44EB3E4ED15F00AC57D20E8C5B7FD02688F974BBD0662F552CBDB7B85D94BBB9C1285D9C9146A41C69B65DC9F008D1B8437F063B9571FBC51F08C61DBA1E8CBE73B6651584030C0475F1D280D5B8F121FE228EEE8CD4528189CDDF7373D2DBD8C133EEBFD8A9BD71F116E29910C1FB78460EEB1B4F14629A906C92E5430E973E14D610E2E0D0A4BD518073720E552413F6B46125434C685F9D5126B643FB314887B6F323B122885C9C0CC865B19ABC68B0869A976498D731EDB2D4943E1F1772C7EC34233D26653A82BA01354EB167B4F1AE89751397DE6A082225181B8D563D79EF909BB7B9188D584F8DC80B76565F14F7C5AE348A14DDE5D915D9B892C689F273791281CB0052E4F47B1812A25CAE17B335ABC9F0068F24644F6FAF81C8297A3249180A3B2664479A18AACC082E42B9592D097861215D929D54F9D3A135D464A941746A88FD046599BF4FE4040000
+-->
+
