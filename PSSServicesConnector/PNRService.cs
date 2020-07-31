@@ -56,7 +56,7 @@ namespace PSSServicesConnector
         {
             Pnr pnrObj = new Pnr { pnrID = pnr, expDate = System.DateTime.Now };
 
-            bool isPnrUpdated = servicesProc.SetTotalFare(pnrObj);
+            bool isPnrUpdated = servicesProc.SetTotalFareForCspModel(pnrObj, model);
 
             pnrObj.DestinationCurrency = destCurrency;
             if (destCurrency == pnrObj.originCurrency)
@@ -69,6 +69,8 @@ namespace PSSServicesConnector
             }
             pnrObj.msg = StatusMessage.SUCCESS;
             pnrObj.responseCode = 0;
+            model.LastUpdated = DateTime.Now;
+            model.pnrStatus = "Retrieved from 1A";
             return pnrObj;
         }
 

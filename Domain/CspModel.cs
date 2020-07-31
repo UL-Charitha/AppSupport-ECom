@@ -10,13 +10,21 @@ namespace Domain
     {
         public string OfficeId { get; set; }
         public string pnrStatus { get; set; }
-        public TicketInfo ticketInfo { get; set; }
         public string paymentStatus { get; set; }
-        public string PaymentAmount { get; set; }
+        public double PaymentAmount { get; set; }
+        public string paymentCurrency { get; set; }
 
         public string TicketedDateString { get; set; }
+        public string TicketNumbers { get; set; }
 
         public string emailOnPnr { get; set; }
-        public string LastUpdatedString { get; set; }
+        public string contactInfo { get; set; }
+        public DateTime LastUpdated{ get; set; }
+
+        public string hasServices { get; set; }
+        
+        public double servicesFare { get; set; }
+        public string travelDatesInfo { get; set; }
+
     }
 }

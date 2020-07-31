@@ -138,12 +138,12 @@ namespace PayLater.Controllers
         [Route("api/pnr2/{pnr}")]
         public IHttpActionResult GetPNRx(string pnr) 
         {
-            // http://localhost:13235/api/PNR/WVH93G/fP9n/LKR
             string currency = "LKR";
             Pnr pnrRet;
             TicketInfo ticketInfo;
             string paymentID = "1234";
             CspModel model = new CspModel();
+            //pnr >> http://localhost:13235/api/PNR2/WVH93G 
 
             try
             {
@@ -169,7 +169,9 @@ namespace PayLater.Controllers
                 //Finally Generate HTML
                 bool done = GenerateHtmlTicketInformation(ticketInfo);
 
-                return Ok(helper.CreatePnrClientResponse(pnrRet));
+                bool cspDataDone = SetCspModelWithTicketInfo(model, ticketInfo);
+
+                return Ok(model);
             }
 
 
@@ -179,7 +181,28 @@ namespace PayLater.Controllers
             }
         }
 
-
+        private bool SetCspModelWithTicketInfo(CspModel model, TicketInfo ticketInfo)
+        {
+            try
+            {
+                model.TicketNumbers = "";
+                model.travelDatesInfo = "";
+                foreach (var item in ticketInfo.ticketList)
+                {
+                    model.TicketNumbers += $"{item.ticket} ({item.paxLName} {item.paxFName}) . ";
+                }
+                foreach (var item in ticketInfo.itineraryInfoList)
+                {
+                    string dateVal = item.dateTimeDep.ToString("dd.MMM.yyyy @ HH:mm");
+                    model.travelDatesInfo += $"|| {dateVal} ({item.stationDep}) [{item.flightID}] ";
+                }
+                return true;
+            }
+            catch (Exception)
+            { 
+                return false;
+            }
+        }
 
         private bool GenerateHtmlTicketInformation(TicketInfo ticketInfo)
         {

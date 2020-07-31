@@ -89,6 +89,81 @@ namespace PSSServicesConnector
             }
         }
 
+        public bool SetTotalFareForCspModel(Pnr pnr , CspModel model)
+        {
+            double baseFare;
+            double servicesFare = 0;
+            string originCurrency;
+
+            try
+            {
+                // Calculate for PNR BaseFare
+                PNR_Reply reply = serviceHandler.RetrievePnr(SessionHandler.TransactionStatusCode.Start,
+                        TransactionFlowLinkHandler.TransactionFlowLinkAction.New, pnr.pnrID, OfficeId);
+
+                baseFare = ProcessResponsePnrRetrieveForCspModel(reply , model);
+                originCurrency = GetOriginCurrency(reply);
+
+                model.OfficeId = reply.sbrCreationPosDetails.sbrUserIdentificationOwn.originIdentification.inHouseIdentification1;
+                model.OfficeId += " ( " + reply.sbrUpdatorPosDetails.sbrUserIdentificationOwn.originIdentification.inHouseIdentification1 + " )";
+                var purgeDate = reply.technicalData.purgeDateData.dateTime;
+                var p11 = reply.technicalData.purgeDateData.dateTime.ToString();
+
+                //pnr.expDate = SetPnrExpiryDate(reply);
+                model.TicketedDateString = SetPnrTicketedDate(reply);
+                //if (pnr.expDate < DateTime.UtcNow)
+                //{
+                //    throw new PaylaterCommonException(3002, StatusMessage.PNR_EXPIRED);
+                //}
+
+                // Calculate for PNR Services Fare
+                Ticket_RetrieveListOfTSMReply RetrieveListOfTSMReply = serviceHandler.RetrieveListOfTSM(SessionHandler.TransactionStatusCode.Continue,
+                                    TransactionFlowLinkHandler.TransactionFlowLinkAction.FollowUp, OfficeId);
+
+                if (RetrieveListOfTSMReply.detailsOfRetrievedTSMs == null)
+                {
+                    model.hasServices = "No";
+                }
+                else
+                {
+                    model.hasServices = "Yes";
+                }
+
+                servicesFare = ProcessRetrieveListOfTSMReply(RetrieveListOfTSMReply, pnr);
+                model.servicesFare = servicesFare;
+
+                // Total Amount to be paid for the PNR : returned val of API/PNR/....
+                pnr.totalAmountOrigin = baseFare + servicesFare;
+                pnr.originCurrency = originCurrency;
+                // Get Pax List from PNR
+                pnr.paxList = GetPNRPaxList(reply);
+
+                model.PaymentAmount = pnr.totalAmountOrigin;
+                model.paymentCurrency = originCurrency;
+                return true;
+            }
+
+            catch (PnrAlreadyPaidException)
+            {
+                throw;
+            }
+            catch (PaylaterCommonException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                PaylaterLogger.Error(ex.Message);
+                if (ex.Message.Contains(AmadeusStatusMessage.INVALID_RECORD_LOCATOR) || ex.Message.Contains(AmadeusStatusMessage.NO_MATCH_FOR_RECORD_LOCATOR))
+                {
+                    throw new PnrNotFoundException(3000, StatusMessage.PNR_NOT_FOUND);
+                }
+                else
+                {
+                    throw new PaylaterCommonException(2001, StatusMessage.INTERNAL_ERROR);
+                }
+            }
+        }
         private List<string> GetPNRPaxList(PNR_Reply reply)
         {
             var travellerInfoList = reply.travellerInfo;
@@ -172,7 +247,31 @@ namespace PSSServicesConnector
             //throw new PaylaterCommonException(2010, StatusMessage.MISSING_EXPIRY_DATE);
         }
 
+        private string SetPnrTicketedDate(PNR_Reply reply)
+        {
+            var dataElementsIndivList = reply.dataElementsMaster.dataElementsIndiv;
+            foreach (var dataElementsIndiv in dataElementsIndivList)
+            {
+                var ticketElement = dataElementsIndiv.ticketElement;
+                if (ticketElement != null)
+                {
+                    if (ticketElement.ticket.indicator == "OK")
+                    {
+                        //string time = ticketElement.ticket.time;// 1300;
+                        DateTime date = DateTime.ParseExact(ticketElement.ticket.date, "ddMMyy", CultureInfo.InvariantCulture);
+                        var dateString = date.ToString("dd.MMM.yyyy") +" ("+ ticketElement.ticket.officeId + ")";
 
+                        //above date is departure station local time. get UTC time
+                        //var originDestinationDetails = reply.originDestinationDetails;
+                        //var itineraryInfoList = originDestinationDetails[0].itineraryInfo;
+                        //string boardPoint = itineraryInfoList[0].travelProduct.boardpointDetail.cityCode;
+                        return dateString;
+                    }
+                }
+            }
+            return "";
+        }
+        
 
         public bool SetConvertedAmount(Pnr pnrObj)
         {
@@ -247,6 +346,115 @@ namespace PSSServicesConnector
                         fpcash = "FPCASH";
                     }
                     break;
+                }
+            }
+
+            if (fpcash == "FPCASH")
+            {
+                string PaymentMode = "Paid"; // Paid
+            }
+            // End Reject section
+            try
+            {
+                if (reply.tstData != null)
+                {
+                    PNR_ReplyTstData[] tstDataList = reply.tstData;
+                    foreach (var tstData in tstDataList)
+                    {
+                        Int16 count = 0;
+                        var monetaryInfo = tstData.fareData.monetaryInfo;
+                        foreach (var info in monetaryInfo)
+                        {
+                            if (info.qualifier == "T")
+                            {
+                                amountTotal = info.amount;
+                                currency = info.currencyCode;
+                            }
+                        } // ok
+                        var refInfo = tstData.referenceForTstData;
+                        foreach (var info in refInfo)
+                        {
+                            if (info.qualifier == "PT")
+                            { count++; }
+                        }
+                        amountsList.Add(amountTotal);
+                        paxCountList.Add(count);
+                    }
+                    for (int i = 0; i < amountsList.Count; i++)
+                    {
+                        baseFare = baseFare + Convert.ToDouble(amountsList[i]) * Convert.ToInt16(paxCountList[i]);
+                    }
+                }
+                else
+                {
+                    if (reply.originDestinationDetails == null)
+                    {
+                        //throw new PaylaterCommonException(3002, StatusMessage.PNR_EXPIRED);
+                    }
+                    else
+                    {
+                        //throw new PaylaterCommonException(3001, StatusMessage.PNR_NOT_PRICED);
+                    }
+
+                }
+
+                return baseFare;
+            }
+            catch (PaylaterCommonException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                PaylaterLogger.Error(ex.Message);
+                throw new PaylaterCommonException(2002, StatusMessage.INTERNAL_ERROR);
+            }
+        }
+
+        
+        private double ProcessResponsePnrRetrieveForCspModel(PNR_Reply reply , CspModel model)
+        {
+            string amountTotal = "";
+            String currency;
+            List<string> amountsList = new List<string>();
+            List<Int16> paxCountList = new List<Int16>();
+            double baseFare = 0;
+            string fpcash = "";
+            model.paymentStatus = "";
+            model.contactInfo = "";
+            model.emailOnPnr = "";
+            // Start : Reject If Already Paid !! -- Charitha 25APR
+            var dataElementsIndiv = reply.dataElementsMaster.dataElementsIndiv;
+
+            foreach (var element in dataElementsIndiv)
+            {
+                if (element.elementManagementData.segmentName == "FP")
+                {
+                    fpcash = "FP";
+                    model.paymentStatus = "FP : " + element.otherDataFreetext[0].longFreetext;
+                    if (element.otherDataFreetext[0].longFreetext == "CASH")
+                    {
+                        fpcash = "FPCASH";
+                    }
+                    break;
+                }
+            }
+
+            foreach (var element in dataElementsIndiv)
+            {
+                if (element.elementManagementData.segmentName == "AP")
+                {                   
+                    if (element.otherDataFreetext[0].longFreetext.Contains("@") && model.emailOnPnr == "")
+                    {
+                        model.emailOnPnr = element.otherDataFreetext[0].longFreetext;
+                    }
+                    else
+                    {
+                        if (!model.contactInfo.Contains(element.otherDataFreetext[0].longFreetext))
+                        {
+                            model.contactInfo += element.otherDataFreetext[0].longFreetext + " . ";
+                        }                    
+                    }
                 }
             }
 
