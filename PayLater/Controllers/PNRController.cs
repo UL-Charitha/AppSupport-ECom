@@ -141,7 +141,7 @@ namespace PayLater.Controllers
             string currency = "LKR";
             Pnr pnrRet;
             TicketInfo ticketInfo;
-            string paymentID = "1234";
+            string paymentID = "1234"; // jz ignore
             CspModel model = new CspModel();
             //pnr >> http://localhost:13235/api/PNR2/WVH93G 
 
@@ -155,14 +155,12 @@ namespace PayLater.Controllers
 
                 PaylaterLogger.Info("Using office id - " + officeId);
                 PNRService pnrService = new PNRService(officeId);
-                //todo check the bank id format in existing paylater
 
                 //Get pnr object with calculated fare in it.
                 pnrRet = pnrService.GetPnrInfoModel(pnr, currency, model);
 
                 ticketInfo = new TicketInfo(Convert.ToInt32(paymentID));
                 ticketInfo.pnrID = pnr;
-                // Validate via DB Info
                 //bool DBvaluesUpdated = SetTicketInfoValues(ticketInfo);
                 // Fill with Amadeus Info
                 bool TicketInfoUpdated = pnrService.GetTicketInfo(ticketInfo);
