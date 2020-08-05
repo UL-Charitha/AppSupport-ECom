@@ -70,7 +70,7 @@ namespace PSSServicesConnector
             pnrObj.msg = StatusMessage.SUCCESS;
             pnrObj.responseCode = 0;
             model.LastUpdated = DateTime.Now;
-            model.pnrStatus = "Retrieved from 1A";
+            model.pnrStatus = "Retrieved";
             return pnrObj;
         }
 
