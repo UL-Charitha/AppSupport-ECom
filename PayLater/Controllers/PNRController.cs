@@ -232,7 +232,7 @@ namespace PayLater.Controllers
                 model.PaymentAmount = 550;
                 model.paymentCurrency = "USD";
                 model.paymentStatus = "FP:CASH";
-                model.pnrStatus = "Retrieved from 1A";
+                model.pnrStatus = "Retrieved";
                 model.servicesFare = 0;
                 model.TicketedDateString = "30.Jul.2020 (CMBUL07AE)";
                 model.TicketNumbers = "603-2111508570 (WARAVITA CHARITHA MR) . ";
@@ -261,7 +261,7 @@ namespace PayLater.Controllers
                 model.PaymentAmount = 550;
                 model.paymentCurrency = "USD";
                 model.paymentStatus = "FP:CASH";
-                model.pnrStatus = "Retrieved from 1A";
+                model.pnrStatus = "Retrieved;
                 model.servicesFare = 0;
                 model.TicketedDateString = "30.Jul.2020 (CMBUL07AE)";
                 model.TicketNumbers = "603-2111508570 (WARAVITA CHARITHA MR) . ";
