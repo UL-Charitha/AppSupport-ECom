@@ -10,31 +10,40 @@ namespace ConsoleApp1
 {
     class Program
     {
-        static void Main(string[] args)
+        public static  void Main(string[] args)
         {
-            try
-            {
-                string path = @"D:\Projects\CSP\Test\YourWeeklyAttendance3.msg";
-                string entryIdFix = "000000003612B23E363C234DB1668719ADC28ED80700D0B65853BEFAB740A79FC94F998287A6000000B860FB00008518C8EE6B02CC47A40E72278D44F18C00047A6F067A0000";
-                Processor proc = new Processor();
-                MSGReader msgReader = new MSGReader();
+            Processor proc = new Processor();
+            string result = proc.TestApi().GetAwaiter().GetResult();
+            Console.WriteLine(result);
+            Console.ReadKey();
 
-                //string entryId = msgReader.GetEntryIdByMsgFile(path);
-                //msgReader.ReadMsgByEntryId(entryIdFix);
+            //try
+            //{
+            //    string path = @"D:\Projects\CSP\Test\YourWeeklyAttendance3.msg";
+            //    string entryIdFix = "000000003612B23E363C234DB1668719ADC28ED80700D0B65853BEFAB740A79FC94F998287A6000000B860FB00008518C8EE6B02CC47A40E72278D44F18C00047A6F067A0000";
+            //    MSGReader msgReader = new MSGReader();
 
-                //msgReader.ReadMsgRealTime("");
-                string iddd = msgReader.ReadMsg(path);
+            //    string datex = DateTime.Now.ToString("yyMMddHHmmssfff");
+            //    return 0;
 
-                //proc.DoWork();
-                //proc.TestSentBox(null);
 
-                //var response = proc.ReadOutlookMsg();
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.ReadKey();
-            }
+            //    //string entryId = msgReader.GetEntryIdByMsgFile(path);
+            //    //msgReader.ReadMsgByEntryId(entryIdFix);
+
+            //    //msgReader.ReadMsgRealTime("");
+            //    string iddd = msgReader.ReadMsg(path);
+
+            //    //proc.DoWork();
+            //    //proc.TestSentBox(null);
+
+            //    //var response = proc.ReadOutlookMsg();
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    Console.ReadKey();
+            //    return 1;
+            //}
         }
 
         private static void DoWorkLater()

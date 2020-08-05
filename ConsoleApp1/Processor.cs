@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,39 @@ namespace ConsoleApp1
 {
     public class Processor
     {
+
+        internal async Task<string> TestApi()
+        {
+
+            CspModel model = null;
+            string path = @"api/pnrTest/QWE123";
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:13235/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                
+
+                HttpResponseMessage response = await client.GetAsync(path);
+                if (response.IsSuccessStatusCode)
+                {
+                    //model = await response.Content.ReadAsAsync<CspModel>();
+                    string xxx = await response.Content.ReadAsStringAsync();
+                    return xxx;
+                }
+
+
+                return null;
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+        }
         internal string ReadOutlookMsg()
         {
 			try
@@ -21,6 +55,8 @@ namespace ConsoleApp1
 				throw;
 			}
         }
+
+
 
         internal void DoWork()
         {

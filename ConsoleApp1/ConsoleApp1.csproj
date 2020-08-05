@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CspModel.cs" />
     <Compile Include="MSGReader.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
