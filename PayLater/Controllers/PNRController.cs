@@ -12,6 +12,7 @@ using PaylaterException;
 using PaylaterException.Fare;
 using PaylaterException.Common;
 using Domain;
+using Newtonsoft.Json;
 
 namespace PayLater.Controllers
 {
@@ -216,6 +217,64 @@ namespace PayLater.Controllers
             }
         }
 
+        [Route("api/pnrTest/{pnr}")]
+        public IHttpActionResult GetPNRTest(string pnr)  
+        {
+            CspModel model = new CspModel();
+
+            try
+            {
+                model.contactInfo = "+94 772258983-B . +94 772258983-H . UL/E+CHARITHA.WARAVITA@SRILANKAN.COM . ";
+                model.emailOnPnr = "CHARITHA.WARAVITA@SRILANKAN.COM";
+                model.hasServices = "No";
+                model.LastUpdated = DateTime.Now;
+                model.OfficeId = "CMBUL08AI ( CMBUL07AE )";
+                model.PaymentAmount = 550;
+                model.paymentCurrency = "USD";
+                model.paymentStatus = "FP:CASH";
+                model.pnrStatus = "Retrieved from 1A";
+                model.servicesFare = 0;
+                model.TicketedDateString = "30.Jul.2020 (CMBUL07AE)";
+                model.TicketNumbers = "603-2111508570 (WARAVITA CHARITHA MR) . ";
+                model.travelDatesInfo = "|| 10.Sep.2020 @ 00:20 (CMB) [UL604] ";
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        [Route("api/pnrTest/{pnr}/{meta}")]
+        public string GetPNRTest2(string pnr, string meta)  
+        {
+            CspModel model = new CspModel();
+
+            try
+            {
+                model.contactInfo = "+94 772258983-B . +94 772258983-H . UL/E+CHARITHA.WARAVITA@SRILANKAN.COM . ";
+                model.emailOnPnr = "CHARITHA.WARAVITA@SRILANKAN.COM";
+                model.hasServices = "No";
+                model.LastUpdated = DateTime.Now;
+                model.OfficeId = "CMBUL08AI ( CMBUL07AE )";
+                model.PaymentAmount = 550;
+                model.paymentCurrency = "USD";
+                model.paymentStatus = "FP:CASH";
+                model.pnrStatus = "Retrieved from 1A";
+                model.servicesFare = 0;
+                model.TicketedDateString = "30.Jul.2020 (CMBUL07AE)";
+                model.TicketNumbers = "603-2111508570 (WARAVITA CHARITHA MR) . ";
+                model.travelDatesInfo = "|| 10.Sep.2020 @ 00:20 (CMB) [UL604] ";
+
+                var dd1 = JsonConvert.SerializeObject(model);
+                return dd1;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
     }
 }
