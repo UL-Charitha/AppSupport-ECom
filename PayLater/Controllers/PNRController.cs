@@ -14,6 +14,7 @@ using PaylaterException.Common;
 using Domain;
 using Newtonsoft.Json;
 using System.Configuration;
+using PayLater.DB;
 
 namespace PayLater.Controllers
 {
@@ -21,6 +22,7 @@ namespace PayLater.Controllers
     {
         private string test;
         Helper helper = new Helper();
+        DBProcessor dbProc = new DBProcessor();
         /// <summary>
         /// paylater new
         /// </summary>
@@ -250,7 +252,19 @@ namespace PayLater.Controllers
                 return BadRequest();
             }
             string officeId = ConfigurationManager.AppSettings["DefaultOfficeId"].ToString();
-            PaylaterLogger.Info("Testing : Using office id - " + officeId); 
+            string dbLogging = ConfigurationManager.AppSettings["DBLogging"].ToString();
+            PaylaterLogger.Info("Testing : Using office id - " + officeId);
+
+            if (dbLogging.ToUpper() == "ON")
+            {
+                string requester = "";
+                if (Request.Headers.Contains("Requester"))
+                {
+                    requester = Request.Headers.GetValues("Requester").FirstOrDefault();
+                }
+                string AbsoluteUri = Request.RequestUri.AbsoluteUri;
+                string status = dbProc.AddServiceReqInfo(requester, AbsoluteUri); 
+            }
 
             CspModel model = new CspModel();
             try
