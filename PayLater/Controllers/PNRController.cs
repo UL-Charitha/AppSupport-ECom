@@ -13,6 +13,7 @@ using PaylaterException.Fare;
 using PaylaterException.Common;
 using Domain;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace PayLater.Controllers
 {
@@ -146,13 +147,18 @@ namespace PayLater.Controllers
             CspModel model = new CspModel();
             //pnr >> http://localhost:13235/api/PNR2/WVH93G 
 
+            if (!IsValidPnr(pnr))
+            {
+                return BadRequest();
+            }
+
             try
             {
                 DBUtility dbUtil = new DBUtility();
 
                 //Get office id related to bank id
                 //string officeId = "CMBUL08P2";//dbUtil.GetOfficeId(bankCode);
-                string officeId = "LONUL08P1"; // dbUtil.GetOfficeIdNew(bankCode);
+                string officeId = ConfigurationManager.AppSettings["DefaultOfficeId"].ToString(); // "LONUL08P1"; // dbUtil.GetOfficeIdNew(bankCode);
 
                 PaylaterLogger.Info("Using office id - " + officeId);
                 PNRService pnrService = new PNRService(officeId);
@@ -177,6 +183,25 @@ namespace PayLater.Controllers
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        private bool IsValidPnr(string pnr)
+        {
+            try
+            {
+                if (pnr.Length == 6)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -220,8 +245,14 @@ namespace PayLater.Controllers
         [Route("api/pnrTest/{pnr}")]
         public IHttpActionResult GetPNRTest(string pnr)  
         {
-            CspModel model = new CspModel();
+            if (!IsValidPnr(pnr))
+            {
+                return BadRequest();
+            }
+            string officeId = ConfigurationManager.AppSettings["DefaultOfficeId"].ToString();
+            PaylaterLogger.Info("Testing : Using office id - " + officeId); 
 
+            CspModel model = new CspModel();
             try
             {
                 model.contactInfo = "+94 772258983-B . +94 772258983-H . UL/E+CHARITHA.WARAVITA@SRILANKAN.COM . ";
