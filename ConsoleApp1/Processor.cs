@@ -16,7 +16,7 @@ namespace ConsoleApp1
         {
 
             CspModel model = null;
-            string path = @"api/pnrTest/QWE123";
+            string path = @"api/pnrTest/QWE124";
             try
             {
                 HttpClient client = new HttpClient();
@@ -25,7 +25,7 @@ namespace ConsoleApp1
                 client.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-                
+                client.DefaultRequestHeaders.Add("Requester", "CSP-Console-Test");
 
                 HttpResponseMessage response = await client.GetAsync(path);
                 if (response.IsSuccessStatusCode)
