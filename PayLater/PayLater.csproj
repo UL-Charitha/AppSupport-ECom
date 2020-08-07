@@ -235,6 +235,8 @@
     <Content Include="Models\DB.edmx.diagram">
       <DependentUpon>DB.edmx</DependentUpon>
     </Content>
+    <Content Include="Logs\Error.log" />
+    <Content Include="Logs\Info.log" />
     <None Include="Properties\PublishProfiles\36.pubxml" />
     <None Include="Properties\PublishProfiles\Local_publish.pubxml" />
     <None Include="Properties\PublishProfiles\pl.pubxml" />
