@@ -251,7 +251,7 @@ namespace PayLater.Controllers
             {
                 return BadRequest();
             }
-            string officeId = ConfigurationManager.AppSettings["DefaultOfficeId"].ToString();
+            string officeId = ConfigurationManager.AppSettings["DefaultOfficeId"].ToString(); // Can be Updated.
             string dbLogging = ConfigurationManager.AppSettings["DBLogging"].ToString();
             PaylaterLogger.Info("Testing : Using office id - " + officeId);
 
