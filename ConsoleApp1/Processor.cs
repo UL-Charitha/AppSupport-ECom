@@ -19,8 +19,11 @@ namespace ConsoleApp1
             string path = @"api/pnrTest/QWE124";
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:13235/");
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.UseDefaultCredentials = true;
+
+                HttpClient client = new HttpClient(handler);
+                client.BaseAddress = new Uri("http://10.236.74.36/CAPA/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
