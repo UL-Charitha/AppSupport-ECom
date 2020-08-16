@@ -156,6 +156,25 @@ namespace PayLater.Controllers
 
             try
             {
+                string dbLogging = ConfigurationManager.AppSettings["DBLogging"].ToString();
+                if (dbLogging.ToUpper() == "ON")
+                {
+                    string requester = "";
+                    if (Request.Headers.Contains("Requester"))
+                    {
+                        requester = Request.Headers.GetValues("Requester").FirstOrDefault();
+                    }
+                    string AbsoluteUri = Request.RequestUri.AbsoluteUri;
+                    string status = dbProc.AddServiceReqInfo(requester, AbsoluteUri);
+                }
+            }
+            catch (Exception ex)
+            {
+                PaylaterLogger.Error("DB Logging Failed. ex: " + ex.Message);
+            }
+
+            try
+            {
                 DBUtility dbUtil = new DBUtility();
 
                 //Get office id related to bank id
