@@ -169,11 +169,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PNRController.cs" />
-    <Compile Include="Controllers\ReconciliationController.cs" />
     <Compile Include="Controllers\SearchByBankRefController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TicketInfoController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DB\DBProcessor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

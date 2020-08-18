@@ -17,6 +17,7 @@ namespace PayLater.Controllers
         [Route("api/Search/{id}")]
         public IHttpActionResult GetPaymentInfo(int id)
         {
+            return BadRequest();
             Helper helper = new Helper();
             Payment payment = null;
             // Test for request Validation @ 27APR

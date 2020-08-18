@@ -16,6 +16,7 @@ namespace PayLater.Controllers
         [Route("api/SearchByBankRef/{bankRef}")] //todo check bank code while searching
         public IHttpActionResult GetPaymentInfo(string bankRef)
         {
+            return BadRequest();
             Helper helper = new Helper();
             Payment payment = null;
             // Test for request Validation @ 27APR
