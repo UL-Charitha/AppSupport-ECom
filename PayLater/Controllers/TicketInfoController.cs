@@ -22,6 +22,7 @@ namespace PayLater.Controllers
         [Route("api/TicketInfo/{paymentID}/{bankcode}")]
         public IHttpActionResult GetPNR(string paymentID, string bankCode)
         {
+            return BadRequest();
             try
             {
                 PaylaterLogger.Info("TicketInfo call received. " + paymentID + " " + bankCode);
