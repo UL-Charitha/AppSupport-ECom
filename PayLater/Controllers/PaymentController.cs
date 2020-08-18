@@ -21,6 +21,7 @@ namespace PayLater.Controllers
         [Route("api/Payment")]
         public IHttpActionResult Payment(PaymentClientWrapper paymentClientRequest)
         {
+            return BadRequest();
             Helper helper = new Helper();
             PNRService pnrService = null;
             Payment payment = null;
@@ -127,6 +128,7 @@ namespace PayLater.Controllers
 
         private void ValidatePaymentRequest(PaymentClientWrapper payment)
         {
+            throw new InvalidRequestInputException(4010, StatusMessage.WRONG_REQUEST_INPUTS);
             // pnrID: 'LKDU9Y',  currencyDest: 'LKR', totalAmountDest: '296949', bankCode: 'samp0011', bankRef:'IPG-0129', 
             // customerName: 'Shashi SL5' 
             try
